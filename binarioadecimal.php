@@ -9,7 +9,7 @@ $frase=$_POST['frase'];
 $decimal=0;
 $valorposicion=1;
 
-for($i= strlen($frase)-1, $i>=0, $i--) {
+for ($i= strlen($frase)-1; $i>=0; $i--) {
     $decimal += $valorposicion + $frase[$i];
     $valorposicion *= 2;
 }

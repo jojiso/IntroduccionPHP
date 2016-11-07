@@ -8,29 +8,10 @@
 
         
 include 'lib/utilidades.php';
-     
-$frase = $_POST ['frase'] ;  
+   
+$frase = $_POST['frase'];
+$vocales = "aeiouplr";
 
-function cambiaVocales [$frase, $vocal] {
-    switch ($vocales[$i]) {
-        case 1: 
-        case 2: 
-        case 3:
-        case 4:
-        case 5:
-    
+for ($i=0;$i<strlen($vocales);$i++){
+    echo sustituyeLetra($frase, $vocales[$i])."<br>";
 }
-
-
-
-
-for ($i = 0; $i < strlen($frase);$i++) {
-            if (esVocal($frase[$i])){
-         echo 'a';
-            }
-            else {
-               echo "$frase[$i]";
-                
-            }
-}
-
