@@ -5,13 +5,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+echo "<table border=1>";
+echo "<tr>";
 
-
-
-$v = array(1=>'90',30=>'2',e=>'99',hola=>'43');
-$suma=0;
-foreach ($v as $valor) {
-    $suma = $suma+$valor;
+for($i=1;$i<=100;$i++){
+    echo "<td>$i</td>";
+    if ($i%10==0){
+    echo "</tr><tr>";    
+    }           
 }
-unset($valor);
-echo "La suma del vector asociativo es $suma.";
+echo "</tr>";
+echo "</table>";

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Ficha Cliente (validación)</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- Incluimos las librerías en la página que contiene el formulario a validar -->  
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>    
+        <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.js"></script>  
+
+        <!-- Mensajes de validación por defecto que serán mostrados si el programador no especifica uno para -->  
+        <!-- cada regla/campo concreto mediante la propiedad messages que veremos posteriormente. -->  
+        <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/localization/messages_es.js"></script>  
+    </head>
+    <body>
+        <form class="cmxform" id="commentForm" method="post" action="leerFicha.php" novalidate>
+            <fieldset>
+                <legend>Proporciona un nombre, un email, una url y un comentario</legend>
+                <p>
+                    <label for="cname">Nombre (requerido, como mínimo 2 carácteres de longitud)</label>
+                    <input id="cname" name="name" minlength="2" type="text" required>
+                </p>
+                <p>
+                    <label for="cemail">E-Mail (requerido)</label>
+                    <input id="cemail" type="email" name="email" required>
+                </p>
+                <p>
+                    <label for="curl">URL (opcional)</label>
+                    <input id="curl" type="url" name="url">
+                </p>
+                <p>
+                    <label for="ccomment">Comentario (requerido)</label>
+                    <textarea id="ccomment" name="comment" required></textarea>
+                </p>
+                <p>
+                <label for="cnif">NIF (opcional)</label>
+                <input id="cnif"  name="nif">  
+                </p>
+            
+                <p>
+                    <input class="submit" type="submit" value="Submit">
+                </p>
+            </fieldset>
+        </form>
+        <script>
+            $("#commentForm").validate({
+                submitHandler: function (form) {
+                    var dataString = 'nombre=' + $('#cname').val() + '&email=' + $('#cemail').val();
+                    $.ajax({
+                        type: "POST",
+                        url: "leerFicha.php",
+                        data: dataString,
+                        success: function (data) {
+                            $("#ok").html(data);
+                            $("#ok").show();
+                            //$("#commentForm").hide();
+                        }
+                    });
+                }
+            });
+        </script>
+        <script>
+            function esNIF(value, element) {
+                var referencia = 'TRWAGMYFPDXBNJZSQVHLCKE';
+                var letra = value.substring(value.length - 1);
+                var numero = parseInt(value.substring(0, value.length - 1));
+                if (referencia.charAt(numero % 23) === letra) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+
+            jQuery.validator.addMethod("esnif", esNIF, "No es un NIF válido");
+            </script>
+    </body>
+</html>

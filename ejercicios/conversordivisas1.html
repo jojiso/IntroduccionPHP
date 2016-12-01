@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Conversor divisas</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+<body>
+ <form action="conversordivisas.php" method="post">
+      Cantidad : <input type="text" name="cantidad"><br><br>
+        Moneda Origen:
+        <select name="origen">
+        <option value="euro" selected>Euro</option>
+        <option value="dolar">Dolar</option>
+        <option value="libra">Libra</option>
+        <option value="yuan">Yuan</option>
+        <option value="rublo">Rublo</option>
+        </select> <br><br>
+      Moneda Destino:<br><br>
+        <input type="checkbox" name="destino[]" value="euro" checked>Euro<br>
+        <input type="checkbox" name="destino[]" value="dolar">Dolar<br>
+        <input type="checkbox" name="destino[]" value="libra">Libra<br>
+        <input type="checkbox" name="destino[]" value="yuan">Yuan<br>
+        <input type="checkbox" name="destino[]" value="rublo">Rublo<br>
+  
+    <input type="submit">
+    
+ </form>
+</body>
+</html>
