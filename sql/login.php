@@ -12,7 +12,7 @@ $conexion = new mysqli("localhost", "root","ausias", "neptuno");
 if ($conexion->connect_errno) { 
     die( "Fallo al contenctar a MySQL: (" . $conexion->connect_errno . ") " . $conexion->connect_error); 
 }
-echo "Conectado a la base de datos..."."<br>";
+#echo "Conectado a la base de datos"."<br>";
 
 // OBTENER LOS DATOS DEL USUARIO
 
@@ -25,11 +25,13 @@ $sql = <<<SQL
    WHERE codCliente = '$usuario' and pass = md5('$pass')
 SQL;
 // echo $sql;
-
-$resultado = new mysqli_result(); //inicializamos objeto resultado de consulta SELECT
-if ($resultado = $conexion->query($sql)) { //no hay error
+$validado = FALSE; 
+$result = new mysqli_result(); 
+//inicializamos objeto resultado de consulta SELECT
+if ($result = $conexion->query($sql) and $result->num_rows==1) { 
 	/*Si queremos mostrar lo que nos ha devuelto la consulta SELECT deberemos pasar por todos las filas devueltas */
-	while ($fila = $resultado->fetch_array()){
+	while ($fila = $result->fetch_array()){
+                $validado = TRUE;
                 $id= $fila['idCliente'];
 		$codCliente= $fila['codCliente'];
                 $nombreCli= $fila['nombreCli'];
@@ -37,13 +39,22 @@ if ($resultado = $conexion->query($sql)) { //no hay error
                 $ciudad= $fila['ciudad'];
                 $cpostal= $fila['cpostal'];
                 $telefono= $fila['telefono'];
-                $fax= $fila['fax'];
-                
-	};
+                $fax= $fila['fax']; 
+               
+      	}
+        
 }
+
+if ($validado == false){
+   echo "Login Incorrecto";
+   die;
+}
+
+$result->free();
 $conexion->close();
 ?>
 <form action="guardar.php" method="post">
+            Actualice su informacion de Cliente<br>
             Cliente: <input type="text" name="cliente" value="<?php echo $nombreCli;?>"><br>
             Direccion: <input type="text" name="direccion" value="<?php echo $direccion;?>"><br>
             Ciudad: <input type="text" name="ciudad" value="<?php echo $ciudad;?>"><br>
@@ -52,4 +63,4 @@ $conexion->close();
             Fax: <input type="text" name="fax" value="<?php echo $fax;?>"><br>
             <input type="hidden" name="id" value="<?php echo $id;?>">
             <input type="submit">
-        </form>
+</form>
