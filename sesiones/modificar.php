@@ -10,7 +10,7 @@
 </head>
 <body>
 <div class="container">
-        <form class="form-horizontal" role="form" method="post" action="login1.php">
+        <form class="form-horizontal" role="form" method="post" action="actualizar.php">
 	<div class="form-group">
 <?php
 
