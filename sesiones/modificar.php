@@ -39,6 +39,8 @@ if ($sentencia->errno){
 }
 //ejecutada con éxito
 $sentencia->bind_result($nombreProd, $nombreProv, $nombreCat, $unidades, $precioD, $precioE, $existencias);
+while ($sentencia->fetch()){
+  }
 ?>
 		<label for="nombre" class="col-xs-2 control-label">nombre del Producto</label>
 		<div class="col-md-3">
@@ -92,7 +94,11 @@ $sentencia->bind_result($nombreProd, $nombreProv, $nombreCat, $unidades, $precio
 			<input type="text" class="form-control" id="existencias" name="existencias" value="<?php echo $existencias; ?>">
 		</div>
 	</div>
-	
+	<div class="form-group">
+		<div class="col-md-2 col-sm-offset-2">
+			<input id="submit" name="submit" type="submit" value="Enviar" class="btn btn-primary">
+		</div>
+	</div>
         </form>
 
 

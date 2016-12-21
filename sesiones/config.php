@@ -9,4 +9,4 @@
 $host="localhost";
 $user="neptunouser";
 $pass="ausias";
-$database="neptunoiaw";
+$database="neptuno";
